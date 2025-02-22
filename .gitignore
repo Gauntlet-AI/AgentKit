@@ -1,0 +1,12 @@
+# Python
+__pycache__
+.venv/*
+
+# Environment variables
+.env
+
+# Logs
+logs/*
+
+# Miscellaneous
+.DS_Store
