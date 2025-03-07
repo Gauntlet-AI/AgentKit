@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentKit - Opinionated LangChain Framework for Developers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="logo">AgentKit</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#docs">Docs</a>
+            <a href="https://github.com/Gauntlet-AI/AgentKit.git" target="_blank">GitHub</a>
+            <a href="#get-started" class="cta-button">Get Started</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="framework-badge">
+                    Built on LangChain
+                    <svg class="chain-icon" viewBox="0 0 24 24" width="16" height="16">
+                        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                        <path fill="currentColor" d="M15 6h-2v5H8v2h5v5h2v-5h5v-2h-5z"/>
+                    </svg>
+                </div>
+                <h1>
+                    <span class="gradient-text">Minimalist</span>
+                    LangChain framework for
+                    <span class="gradient-text">building AI agents</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    AgentKit is an opinionated layer on top of LangChain that makes it easy to integrate custom AI agents into your applications. Define your tools and agent behavior in a simple YAML file - from chatbots to specialized AI assistants.
+                </p>
+
+                <div class="cta-group">
+                    <a href="#get-started" class="primary-button">Get Started</a>
+                    <a href="https://github.com/Gauntlet-AI/AgentKit" class="secondary-button">
+                        <svg height="32" viewBox="0 0 16 16" width="32">
+                            <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                        </svg>
+                        Star on GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="code-preview">
+                <div class="code-tabs">
+                    <button class="tab active" data-tab="yaml">agent_config.yml</button>
+                    <button class="tab" data-tab="python">main.py</button>
+                </div>
+                <pre class="code-block active" data-tab="yaml"><code class="yaml-code"># AgentKit Configuration
+<span class="key">name:</span> <span class="string">"CustomerSupportAgent"</span>
+<span class="key">description:</span> <span class="string">"AI assistant for customer support"</span>
+
+<span class="key">tools:</span>
+  - <span class="key">name:</span> <span class="string">"ticket_search"</span>
+    <span class="key">description:</span> <span class="string">"Search through support tickets"</span>
+    <span class="key">path:</span> <span class="string">"./tools/ticket_search.py"</span>
+    
+  - <span class="key">name:</span> <span class="string">"knowledge_base"</span>
+    <span class="key">description:</span> <span class="string">"Access product documentation"</span>
+    <span class="key">path:</span> <span class="string">"./tools/kb_access.py"</span>
+    
+  - <span class="key">name:</span> <span class="string">"email_sender"</span>
+    <span class="key">description:</span> <span class="string">"Send response emails"</span>
+    <span class="key">path:</span> <span class="string">"./tools/email.py"</span>
+
+<span class="key">documentation:</span>
+  - <span class="key">path:</span> <span class="string">"./docs/support/**/*.md"</span>
+  - <span class="key">url:</span> <span class="string">"https://api.your-product.com/docs"</span>
+
+<span class="key">models:</span>
+  <span class="key">default:</span> <span class="string">"gpt-4"</span>
+  <span class="key">fallback:</span> <span class="string">"gpt-3.5-turbo"</span></code></pre>
+                <pre class="code-block" data-tab="python"><code class="python-code"><span class="keyword">from</span> agentkit <span class="keyword">import</span> <span class="class">Agent</span>
+
+<span class="comment"># Initialize your custom support agent</span>
+support_agent = <span class="class">Agent</span>.<span class="function">from_config</span>(<span class="string">"support_agent_config.yml"</span>)
+
+<span class="comment"># Handle customer inquiry</span>
+response = support_agent.<span class="function">handle_inquiry</span>(<span class="string">"""
+    Customer reported issues with login
+    after recent password reset
+"""</span>)
+
+<span class="comment"># The agent will automatically:</span>
+<span class="comment"># 1. Search relevant support tickets</span>
+<span class="comment"># 2. Check knowledge base for solutions</span>
+<span class="comment"># 3. Draft and send a response email</span>
+<span class="builtin">print</span>(response.summary)</code></pre>
+            </div>
+        </section>
+
+        <section class="architecture">
+            <h2>Simple Yet Powerful Architecture</h2>
+            <div class="architecture-diagram">
+                <div class="layer-container">
+                    <div class="layer your-code">
+                        <div class="layer-icon">🛠️</div>
+                        <div class="layer-content">
+                            <h3>Your Tools</h3>
+                            <p>Build custom tools that give your AI agents the exact capabilities they need - from API calls to database queries.</p>
+                        </div>
+                    </div>
+                    <div class="layer-arrow">↓</div>
+                    <div class="layer agent-kit">
+                        <div class="layer-icon">⚡</div>
+                        <div class="layer-content">
+                            <h3>AgentKit</h3>
+                            <p>Configure your agents with a simple YAML file. Define tools, set behavior, and manage interactions without complex code.</p>
+                        </div>
+                    </div>
+                    <div class="layer-arrow">↓</div>
+                    <div class="layer langchain">
+                        <div class="layer-icon">🔗</div>
+                        <div class="layer-content">
+                            <h3>LangChain</h3>
+                            <p>Built on LangChain's powerful agent framework, with production-ready defaults and simplified integration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Why AgentKit?</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>Simple Integration</h3>
+                    <p>Create and deploy custom AI agents with minimal setup. Just define your tools and configuration.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3>Flexible Tools</h3>
+                    <p>Build the exact tools your agents need - from API integrations to complex business logic.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡️</div>
+                    <h3>Powered by LangChain</h3>
+                    <p>Leverage LangChain's battle-tested agent framework with simplified configuration and deployment.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>Developer-First</h3>
+                    <p>Built for developers who need to integrate custom AI agents into their applications.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="get-started" id="get-started">
+            <h2>Ready to Get Started?</h2>
+            <div class="installation-steps">
+                <pre><code>pip install agentkit</code></pre>
+                <a href="#docs" class="primary-button">Read the Docs</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AgentKit</h4>
+                <p>Making AI integration simple and powerful.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#docs">Documentation</a>
+                <a href="#examples">Examples</a>
+                <a href="#tutorials">Tutorials</a>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <a href="https://github.com/yourusername/agentkit">GitHub</a>
+                <a href="#discord">Discord</a>
+                <a href="#twitter">Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AgentKit. Open source and made with ❤️</p>
+        </div>
+    </footer>
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and code blocks
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.code-block').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding code block
+                    tab.classList.add('active');
+                    const tabType = tab.getAttribute('data-tab');
+                    document.querySelector(`.code-block[data-tab="${tabType}"]`).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
